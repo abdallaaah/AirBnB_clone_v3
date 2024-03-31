@@ -56,7 +56,7 @@ class DBStorage:
         self.__session.add(obj)
 
     def get(self, cls, id):
-        """Returns the object based on the class and its ID, or None if not found"""
+        """Returns the object based on the class and its ID"""
         for clss in classes:
             if cls is classes[clss]:
                 cc = classes[clss]
@@ -75,8 +75,6 @@ class DBStorage:
             ob = classes[clss]
             count += self.__session.query(ob.id).count()
         return (count)
-
-
 
     def save(self):
         """commit all changes of the current database session"""

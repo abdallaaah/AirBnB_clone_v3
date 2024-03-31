@@ -50,13 +50,10 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
-        try:
-            with open(self.__file_path, 'r') as f:
-                jo = json.load(f)
-            for key in jo:
-                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
-            pass
+        with open(self.__file_path, 'r') as f:
+            jo = json.load(f)
+        for key in jo:
+            self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
@@ -70,7 +67,7 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """Returns the object based on the class and its ID, or None if not found"""
+        """Returns the object based on the class and its ID"""
         for clss in classes:
             if cls is classes[clss]:
                 cc = classes[clss]
