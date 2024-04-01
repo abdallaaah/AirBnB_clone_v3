@@ -8,11 +8,13 @@ from models.engine.db_storage import *
 
 @app_views.route('/status', methods=['GET'])
 def status():
+    """return the status ok for testing"""
     return jsonify({'status': "OK"})
 
 
 @app_views.route('/stats', methods=['GET'])
 def stats():
+    """return the count of classes"""
     storage = DBStorage()  # Ensure DBStorage is instantiated
     storage.reload()  # Make sure the session is loaded
     count_dict = {}
