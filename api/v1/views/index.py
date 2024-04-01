@@ -17,10 +17,7 @@ def stats():
     storage.reload()  # Make sure the session is loaded
     count_dict = {}
     for class_name in classes.keys():
-        print(classes.keys)
         count_dict[class_name.lower()] = storage.count(class_name)
-
-    print(count_dict)  # Or return this in a response
     return jsonify(count_dict)  # Convert the count_dict into a JSON response
 
 
