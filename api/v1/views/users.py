@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """Handles all RESTful API actions for `User`"""
+
+
 from api.v1.views import app_views
+from hashlib import md5
 from flask import jsonify, request, abort
 from models import storage
 from models.user import User
-from hashlib import md5
 
 
 @app_views.route("/users", strict_slashes=False)
