@@ -4,23 +4,18 @@
 from . import app_views
 from flask import jsonify
 from models.engine.db_storage import *
-
+from models import storage
 
 @app_views.route('/status', methods=['GET'])
 def status():
-    """return the status ok for testing"""
     return jsonify({'status': "OK"})
-
 
 @app_views.route('/stats', methods=['GET'])
 def stats():
-    """return the count of classes"""
-    storage = DBStorage()  # Ensure DBStorage is instantiated
-    storage.reload()  # Make sure the session is loaded
     count_dict = {}
-    for class_name in classes.keys():
-        count_dict[class_name.lower()] = storage.count(class_name)
-    return jsonify(count_dict)  # Convert the count_dict into a JSON response
+    for cls in classes:
+        count_dict[cls] = storage.count(classes[cls])
+    return jsonify(count_dict)
 
 
 @app_views.route('/', strict_slashes=False)
