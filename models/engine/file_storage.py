@@ -70,22 +70,14 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """Returns the object based on the class and its ID"""
-        for clss in classes:
-            if cls is classes[clss]:
-                cc = classes[clss]
-                obj = self.__session.query(cc).filter(cc.id == id).first()
-                if obj:
-                    return obj
-                else:
-                    return None
+        """Return one object or `None` if not found"""
+        key = "{}.{}".format(cls.__name__, id)
+        if key in self.__objects.keys():
+            return self.__objects[key]
+        return None
 
     def count(self, cls=None):
-        """this return the count of the objects"""
-        count = 0
-        for clss in classes:
-            if cls and cls is classes[clss]:
-                return (self.__session.query(cls.id).count())
-            ob = classes[clss]
-            count += self.__session.query(ob.id).count()
-        return (count)
+        """Return the number of objects in storage"""
+        if cls is not None:
+            return len(self.all(cls))
+        return len(self.__objects)
