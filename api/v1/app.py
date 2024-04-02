@@ -16,10 +16,11 @@ def teardown_db(exception):
     """exception"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(error):
+    """error handling"""
     return jsonify({"error": "Not found"}), 404
-
 
 
 if __name__ == '__main__':
