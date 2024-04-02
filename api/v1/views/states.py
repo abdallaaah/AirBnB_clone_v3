@@ -8,7 +8,7 @@ from models.state import State
 from . import app_views
 
 
-@app_views.route("/states/")
+@app_views.route("/states", strict_slashes=False ,methods=['GET'])
 def states_now():
     """Retrieve the list of all `State` objects"""
     result = []
@@ -17,7 +17,7 @@ def states_now():
     return jsonify(result)
 
 
-@app_views.route("/states/<state_id>")
+@app_views.route("/states/<state_id>", strict_slashes=False)
 def state_now(state_id: str):
     """Retrive one state object
 
@@ -33,7 +33,7 @@ def state_now(state_id: str):
     return jsonify(result.to_dict())
 
 
-@app_views.route("/states/<state_id>", methods=["DELETE"])
+@app_views.route("/states/<state_id>", methods=["DELETE"], strict_slashes=False)
 def delete_state(state_id):
     """Delete a state object
 
@@ -51,7 +51,7 @@ def delete_state(state_id):
     return jsonify({})
 
 
-@app_views.route("/states/", methods=["POST"])
+@app_views.route("/states", methods=["POST"], strict_slashes=False)
 def create_state():
     """Create a `State` object"""
     if not request.get_json():
@@ -63,7 +63,7 @@ def create_state():
     return jsonify(state.to_dict()), 201
 
 
-@app_views.route("/states/<state_id>", methods=["PUT"])
+@app_views.route("/states/<state_id>", methods=["PUT"], strict_slashes=False)
 def update_state(state_id):
     """Update `State` object
 
