@@ -4,6 +4,7 @@
 from flask import Flask
 import os
 from .views import *
+from flask import jsonify
 from models import storage
 
 app = Flask(__name__)
@@ -14,6 +15,11 @@ app.register_blueprint(app_views)
 def teardown_db(exception):
     """exception"""
     storage.close()
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({"error": "Not found"}), 404
+
 
 
 if __name__ == '__main__':
