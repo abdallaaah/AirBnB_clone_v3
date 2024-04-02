@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 """entry point for the flask api program"""
 
-from flask import Flask
 import os
-from .views import *
-from flask import jsonify
+from flask import Flask, jsonify
 from models import storage
+from .views import *
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
