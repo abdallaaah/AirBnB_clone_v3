@@ -52,7 +52,7 @@ def delete_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route("/states/<state_id>/cities", methods=["POST"], strict_slashes=False)
+@app_views.route("/states/<state_id>/cities", methods=["POST"])
 def create_city(state_id):
     """Create a city
 
@@ -75,6 +75,7 @@ def create_city(state_id):
 
 @app_views.route("/cities/<city_id>", methods=["PUT"], strict_slashes=False)
 def update_city(city_id):
+    """uodate city"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
