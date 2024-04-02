@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """index if the views """
 
-from . import app_views
 from flask import jsonify
 from models.engine.db_storage import *
 from models import storage
+from . import app_views
 
 
 @app_views.route('/status', methods=['GET'])
@@ -20,8 +20,3 @@ def stats():
     for cls_key in classes:
         count_dict[cls_key] = storage.count(classes[cls_key])
     return jsonify(count_dict)
-
-
-@app_views.route('/', strict_slashes=False)
-def index():
-    return 'index'
