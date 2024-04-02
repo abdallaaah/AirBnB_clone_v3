@@ -8,7 +8,7 @@ from models.state import State
 from . import app_views
 
 
-@app_views.route("/states", strict_slashes=False ,methods=['GET'])
+@app_views.route("/states", strict_slashes=False, methods=['GET'])
 def states_now():
     """Retrieve the list of all `State` objects"""
     result = []
